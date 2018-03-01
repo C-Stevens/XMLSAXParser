@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeView;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -30,14 +31,14 @@ public class XMLSAXParserFXMLController implements Initializable {
     private Stage stage;
     
     @FXML
-    private TreeView tree;
+    private Pane viewPane;
     
     @FXML
     private void handleFileOpen(ActionEvent event) {
         System.out.println("File open event"); //DEBUG
         File inputFile = fileChooser.showOpenDialog(stage);
         if(inputFile != null) {
-            openFile(inputFile);
+            viewPane.getChildren().add(XMLParser.createTreeViewFromXML(inputFile));
         } else {
             //TODO error handling
         }
@@ -68,8 +69,5 @@ public class XMLSAXParserFXMLController implements Initializable {
         });
     }
     
-    private void openFile(File file) {
-        //TODO
-    }
     
 }
