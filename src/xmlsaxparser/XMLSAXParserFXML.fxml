@@ -6,7 +6,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <VBox prefHeight="419.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xmlsaxparser.XMLSAXParserFXMLController">
    <children>
       <MenuBar>
@@ -23,6 +22,6 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TreeView fx:id="tree" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      <Pane fx:id="viewPane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
    </children>
 </VBox>
