@@ -19,12 +19,16 @@ public class XMLSAXParser extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("XMLSAXParserFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("XMLSAXParserFXML.fxml"));
+        Parent root = loader.load();
+        XMLSAXParserFXMLController controller = loader.getController();
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("XML SAX Parser");
         stage.show();
+        controller.start(stage);
     }
 
     /**
