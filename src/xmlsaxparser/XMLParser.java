@@ -6,6 +6,8 @@
 package xmlsaxparser;
 
 import java.io.File;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javax.xml.parsers.SAXParser;
@@ -34,9 +36,6 @@ public class XMLParser {
         
         @Override
         public void startElement(String namespaceURI, String lName, String qName, Attributes attribs) throws SAXException {
-            System.out.println("Starting element with qname: "+qName); //DEBUG
-            
-            System.out.println("Attribs: "+attribs.getURI(0)); //DEBUG
             String tagName;
             if(lName == "") { // If localName is empty, use the qualifiedName
                 tagName = qName;
@@ -44,7 +43,7 @@ public class XMLParser {
                 tagName = lName;
             }
             for(int i=0; i<attribs.getLength(); i++) {
-                tagName = tagName+" "+attribs.getQName(i)+"="+attribs.getValue(i);
+                tagName = tagName+" "+attribs.getQName(i)+"="+attribs.getValue(i)+" ";
             }
             TreeItem<String> newNode = new TreeItem<String>(tagName);
             if(this.tree.getRoot() == null) { // If the tree doesn't exist, we need to set the root element first
@@ -61,7 +60,6 @@ public class XMLParser {
         
         @Override
         public void endElement(String namespaceURI, String sName, String qName) throws SAXException {
-            System.out.println("Ending element with qName: "+qName); //DEBUG
             // Since our element is ending, move back up the tree one element for next iteration
             currentNode = currentNode.getParent();
         }
@@ -74,7 +72,6 @@ public class XMLParser {
             }
             TreeItem<String> valueNode = new TreeItem<String>(elementString);
             currentNode.getChildren().add(valueNode);
-            System.out.println("Current string value: "+elementString); //DEBUG
         }
     }
     
@@ -85,8 +82,10 @@ public class XMLParser {
             SAXParser saxParser = factory.newSAXParser();
             saxParser.parse(file, handler);
         } catch(Exception e) {
-            System.out.println("An exception occured!"); //DEBUG
-            //TODO handle exception
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("Parsing Error");
+            alert.setContentText("There was an error parsing the XML file.");
+            alert.showAndWait();
         }
         
         return handler.getTreeView();
