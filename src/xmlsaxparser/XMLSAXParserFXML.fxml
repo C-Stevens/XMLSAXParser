@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="419.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xmlsaxparser.XMLSAXParserFXMLController">
+<VBox minWidth="250.0" prefHeight="420.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xmlsaxparser.XMLSAXParserFXMLController">
    <children>
       <MenuBar>
         <menus>
@@ -22,6 +23,18 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Pane fx:id="viewPane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+      <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" VBox.vgrow="ALWAYS">
+        <content>
+          <AnchorPane fx:id="viewPane" minWidth="-Infinity" prefHeight="390.0" prefWidth="247.0">
+               <children>
+                  <Text fill="#7c7c7c" layoutX="84.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an XML File to begin" textAlignment="CENTER" wrappingWidth="79.048828125">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </VBox>
