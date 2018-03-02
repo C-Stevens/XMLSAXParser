@@ -36,11 +36,15 @@ public class XMLParser {
         public void startElement(String namespaceURI, String lName, String qName, Attributes attribs) throws SAXException {
             System.out.println("Starting element with qname: "+qName); //DEBUG
             
+            System.out.println("Attribs: "+attribs.getURI(0)); //DEBUG
             String tagName;
             if(lName == "") { // If localName is empty, use the qualifiedName
                 tagName = qName;
             } else {
                 tagName = lName;
+            }
+            for(int i=0; i<attribs.getLength(); i++) {
+                tagName = tagName+" "+attribs.getQName(i)+"="+attribs.getValue(i);
             }
             TreeItem<String> newNode = new TreeItem<String>(tagName);
             if(this.tree.getRoot() == null) { // If the tree doesn't exist, we need to set the root element first
