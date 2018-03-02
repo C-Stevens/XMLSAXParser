@@ -9,19 +9,13 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TreeView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  *
@@ -37,19 +31,20 @@ public class XMLSAXParserFXMLController implements Initializable {
     
     @FXML
     private void handleFileOpen(ActionEvent event) {
-        System.out.println("File open event"); //DEBUG
         File inputFile = fileChooser.showOpenDialog(stage);
         if(inputFile != null) {
             viewPane.getChildren().clear();
             viewPane.getChildren().add(XMLParser.createTreeViewFromXML(inputFile));
         } else {
-            //TODO error handling
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setHeaderText("File Error");
+            alert.setContentText("There was an error opening the specified file.");
+            alert.showAndWait();
         }
     }
     
     @FXML
     private void handleAbout(ActionEvent event) {
-        System.out.println("About event"); //DEBUG
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("About");
         alert.setHeaderText(null);
@@ -65,12 +60,5 @@ public class XMLSAXParserFXMLController implements Initializable {
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("XML Files", "*.xml")
         );
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent we) {
-                // Do some closing of vars here... //TODO
-            }
-        });
     }
-    
-    
 }
